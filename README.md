@@ -1,8 +1,9 @@
 ## Motivation
 
 Glitch Grid is a toy distributed system for demonstrating how to
-integrate with the [Antithesis Platform](https://antithesis.com/). This project demonstrates:
+integrate with the [Antithesis Platform](https://antithesis.com/). 
 
+This project demonstrates:
 * Use of [the Antithesis SDK]((https://antithesis.com/docs/using_antithesis/sdk/overview.html#))
    to [define properties](https://antithesis.com/docs/using_antithesis/properties/)
 * Instrumenting a Go project for [coverage information](https://antithesis.com/docs/instrumentation/overview.html)
