@@ -84,6 +84,13 @@ func (s *ControlServer) get(w http.ResponseWriter, r *http.Request) {
 	var statusCode int
 	var body string
 	if result >= 0 {
+    assert.Always(
+			result >= s.minValue,
+			"Retrieved counter value should never be less than the minimum value ever set",
+			Details{"result": result, "minValue": s.minValue},
+    	)
+	}
+	if result >= 0 {
 		assert.AlwaysOrUnreachable(true, "Counter's value retrieved", Details{"counter": body, "status": statusCode})
 		statusCode = http.StatusOK
 		body = fmt.Sprintf("%d", result)
@@ -146,6 +153,8 @@ func (s *ControlServer) getValueFromVaults() int {
 	}
 	// We do not have consensus, but we do know how popular the most common value(s) is/are.
 	glog.Warningf("No majority; only have %d/%d with a consensus value", maxVal, len(s.Vaults))
+	//Unreachable assertion here.
+	assert.Unreachable("No majority reached", nil)
 	return -1
 }
 
