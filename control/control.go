@@ -84,11 +84,11 @@ func (s *ControlServer) get(w http.ResponseWriter, r *http.Request) {
 	var statusCode int
 	var body string
 	if result >= 0 {
-    assert.Always(
-			result >= s.minValue,
-			"Retrieved counter value should never be less than the minimum value ever set",
-			Details{"result": result, "minValue": s.minValue},
-    	)
+		assert.Always(
+				result >= s.minValue,
+				"Retrieved counter value should never be less than the minimum value ever set",
+				Details{"result": result, "minValue": s.minValue},
+			)
 	}
 	if result >= 0 {
 		assert.AlwaysOrUnreachable(true, "Counter's value retrieved", Details{"counter": body, "status": statusCode})

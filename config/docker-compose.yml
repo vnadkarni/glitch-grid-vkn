@@ -68,9 +68,27 @@ services:
       - NUM_STEPS=100
       - MAX_STEP_SIZE=3
       - CHECK_WHEN_MULTIPLE_OF=10
+      - ANTITHESIS_SDK_LOCAL_OUTPUT=assertions_workload.json
     networks:
       go-demo:
         ipv4_address: 10.0.1.110
+
+  workload_randomized:
+    # The address of the controller
+    command: "10.0.1.120:8000"
+    image: demo-workload_randomized:${IMAGE_TAG}
+    build: ../workload_randomized/
+    container_name: workload_randomized
+    environment:
+      - START_DELAY=15
+      - FINAL_DELAY=5
+      - NUM_STEPS=100
+      - MAX_STEP_SIZE=3
+      - CHECK_WHEN_MULTIPLE_OF=10
+      - ANTITHESIS_SDK_LOCAL_OUTPUT=assertions_workload_randomized.json
+    networks:
+      go-demo:
+        ipv4_address: 10.0.1.105
 
 networks:
   go-demo:
