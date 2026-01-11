@@ -72,6 +72,8 @@ services:
     networks:
       go-demo:
         ipv4_address: 10.0.1.110
+    profiles:
+      - "original_test"
 
   workload_randomized:
     # The address of the controller
@@ -89,6 +91,28 @@ services:
     networks:
       go-demo:
         ipv4_address: 10.0.1.105
+    profiles:
+      - "test_decreasing_input"
+
+  singleton_driver_workload:
+    # The address of the controller
+    command: "10.0.1.120:8000"
+    image: demo-singleton_driver_workload:${IMAGE_TAG}
+    build: ../singleton_driver_workload/
+    container_name: singleton_driver_workload
+    environment:
+      - START_DELAY=15
+      - FINAL_DELAY=5
+      - NUM_STEPS=100
+      - MAX_STEP_SIZE=3
+      - CHECK_WHEN_MULTIPLE_OF=10
+      - ANTITHESIS_SDK_LOCAL_OUTPUT=assertions_singleton_driver_workload.json
+    networks:
+      go-demo:
+        ipv4_address: 10.0.1.107
+    profiles:
+      - "singleton_driver_workload"
+    entrypoint: "sleep infinity"
 
 networks:
   go-demo:
